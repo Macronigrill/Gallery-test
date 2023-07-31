@@ -110,7 +110,7 @@ function appendImages(imageTitle, imageInfo) {
     const linkElement = document.createElement("a");
 
     //modifying elements so the image can be clicked to be displayed directly
-    linkElement.href = "/Images/" + imageTitle;
+    linkElement.href = "/Images/get/" + imageTitle;
     galleryElement.id = "image" + imageTitle;
 
     //Modifying the elements class names so the proper style can be applied
