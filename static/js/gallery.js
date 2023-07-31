@@ -110,7 +110,7 @@ function appendImages(imageTitle, imageInfo) {
     const linkElement = document.createElement("a");
 
     //modifying elements so the image can be clicked to be displayed directly
-    linkElement.href = "/GetImages/" + imageTitle;
+    linkElement.href = "/Images/" + imageTitle;
     galleryElement.id = "image" + imageTitle;
 
     //Modifying the elements class names so the proper style can be applied
@@ -131,7 +131,7 @@ function appendImages(imageTitle, imageInfo) {
     galleryElement.appendChild(userElement);
 
     //Making a GET request for the image in question
-    fetch("/GetImages/" + imageTitle)
+    fetch("/Images/get/" + imageTitle)
       //handling the response
       .then((response) => {
         //throwing an error if the response is faulty

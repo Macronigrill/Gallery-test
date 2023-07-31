@@ -12,6 +12,9 @@ from pathlib import Path
 #Import Json to handle json files
 import json
 
+#importing os to remove files if necessary
+import os
+
 #Import uvicorn to handle server
 import uvicorn
 
@@ -19,7 +22,6 @@ import uvicorn
 testAPI = FastAPI()
 
 #Setting The filepath where the file containing comments and image data is found
-commentPath = Path("variable/Json/comments.json")
 imageDataPath = Path("variable/Json/imageData.json")
 
 #Mounting the static filetree, to serve these files easily
@@ -33,39 +35,66 @@ def home():
 
 
 
+#This endpoint sends out the master JSON containing all image information
 @testAPI.get("/GetImageList")
 def getImageList():
     with open(imageDataPath,"r") as imageDataFile:
         imageData = json.load(imageDataFile)
         print(imageData)
         return imageData
-    
-@testAPI.get("/GetImages/{title}")
+
+#tis endpoint sends out a specific image   
+@testAPI.get("/Images/get/{title}")
 def getImages(title : str):
     imagePath = f"./variable/images/{title}.png"
     return FileResponse(imagePath, media_type="image/png")
 
-imagePath = Path("variable/Json/imageData.json")
-
+#this endpoint is used to store an image sent by a user
 @testAPI.post("/uploadImage")
 def uploadImage( user: str = Form(...),title: str = Form(...), description : str = Form(...), image: UploadFile = File(...) ):
    
+    #opening the master image data JSON
     imageDataFile = open(imageDataPath,"r")
     imageData = json.load(imageDataFile)
 
-    title.replace(" ","")
-    title.replace(".","")
-
-    file = open(f"./variable/images/{title}.png", "wb")
-    file.write(image.file.read())
-
+    #cleaning up the title to remove dots
+    title.replace("."," ")
+    
+    #return error if an image with this title already exists
     if title in imageData:
         return "Error"
+
+    #saving the image with the proper title
+    file = open(f"./variable/images/{title}.png", "wb")
+    file.write(image.file.read())
     
+    #adding data about the new image to the master JSON
     imageData[title] = {"user": user, "description": description}
 
+    #saving the changes to the master JSON
     imageDataFile = open(imageDataPath,"w")
     json.dump(imageData, imageDataFile)
+
+#This endpoint deletes an image from storage
+@testAPI.delete("/Images/delete/{title}")
+def deleteImage(title:str):
+    
+    imagePath = f"./variable/images/{title}.png"
+    
+    imageDataFile = open(imageDataPath,"r")
+    imageData = json.load(imageDataFile)
+
+    if title in imageData:
+        imagePath = f"./variable/images/{title}.png"
+        os.remove(imagePath)
+
+        del imageData[title]
+
+        imageDataFile = open(imageDataPath,"w")
+        json.dump(imageData, imageDataFile)
+    else:
+        return "error"
+
 
 
 
