@@ -28,7 +28,7 @@ testAPI.mount("/static", StaticFiles(directory="./static"),name="static")
 #Defining the method to be called when an Empty GET request is made - might update this to reroute to static filetree if possible
 @testAPI.get("/", response_class=HTMLResponse)
 def home():
-    file = open("index.html", "rb")
+    file = open("static/html/index.html", "rb")
     return file.read()
 
 
@@ -42,7 +42,7 @@ def getImageList():
     
 @testAPI.get("/GetImages/{title}")
 def getImages(title : str):
-    imagePath = "variable/images/{}.png".format(title)
+    imagePath = f"variable/images/{title}.png"
     return FileResponse(imagePath, media_type="image/png")
 
 imagePath = Path("variable/Json/imageData.json")

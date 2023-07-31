@@ -72,6 +72,7 @@ function submitImage() {
     .catch((error) => {
       console.error("Error Posting image:", error);
     });
+    setTimeout(loadImages(), 2000);
 }
 
 //This function gets the images from the server and displays them on the website, with a username and description
@@ -93,7 +94,6 @@ function loadImages() {
         }
     })
     
-    setTimeout(loadImages(),2000);
 }
 
 //This function is used to display an image on the website, after organizing it into the proper format. it takes an image id,the imageInfo json, and the array of keys in the json as arguments
