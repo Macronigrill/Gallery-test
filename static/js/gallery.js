@@ -87,19 +87,20 @@ function loadImages() {
         //Making an array of keys in the json (these keys are numbers, this is done so the number of images can be checked)
         imageKeysArray = Object.keys(imageInfo);
         //Running the append image function, for every image in the image Info
-        for(let i = 0; i <= imageKeysArray.length; i++) {
+        for(let i = 0; i < imageKeysArray.length; i++) {
             //appending the images with the relevant data
-            appendImages(i, imageInfo,imageKeysArray);
+            appendImages(i, imageKeysArray);
         }
     })
-
+    
+    setTimeout(loadImages(),2000);
 }
 
 //This function is used to display an image on the website, after organizing it into the proper format. it takes an image id,the imageInfo json, and the array of keys in the json as arguments
-function appendImages(i,imageInfo,imageKeysArray) {
+function appendImages(i,imageKeysArray) {
 
     
-    console.log(imageInfo[imageKeysArray[i]]);
+    console.log(imageKeysArray[i])
 
     //creating the elements necessary to display the image on the website
     const galleryElement = document.createElement("li");
@@ -110,7 +111,7 @@ function appendImages(i,imageInfo,imageKeysArray) {
 
     //modifying elements so the image can be clicked to be displayed directly
     linkElement.href = "/GetImages/" + imageKeysArray[i];
-    galleryElement.id = "image" + imageKeysArray[i];
+    galleryElement.id = "image" + i;
 
     //Modifying the elements class names so the proper style can be applied
     userElement.className = "userElement";
@@ -118,10 +119,9 @@ function appendImages(i,imageInfo,imageKeysArray) {
     titleElement.className = "titleElement";
 
     //inserting the data from the image Info json into the HTML elements
-    console.log(imageInfo[imageKeysArray[i]]["user"]);
-    userElement.innerText = "Uploaded by " + imageInfo[imageKeysArray[i]]["user"];
-    titleElement.innerText = imageInfo[imageKeysArray[i]]["title"];
-    descriptionElement.innerText = imageInfo[imageKeysArray[i]]["description"];
+    userElement.innerText = "Uploaded by " + imageKeysArray[i]["user"];
+    titleElement.innerText = imageKeysArray[i];
+    descriptionElement.innerText = imageKeysArray[i]["description"];
 
 
     //Constructing the element hierarchy to be displayed on the website
