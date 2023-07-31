@@ -42,7 +42,7 @@ def getImageList():
     
 @testAPI.get("/GetImages/{title}")
 def getImages(title : str):
-    imagePath = f"variable/images/{title}.png"
+    imagePath = f"./variable/images/{title}.png"
     return FileResponse(imagePath, media_type="image/png")
 
 imagePath = Path("variable/Json/imageData.json")
@@ -53,10 +53,13 @@ def uploadImage( user: str = Form(...),title: str = Form(...), description : str
     imageDataFile = open(imageDataPath,"r")
     imageData = json.load(imageDataFile)
 
+    title.replace(" ","")
+    title.replace(".","")
+
     file = open(f"./variable/images/{title}.png", "wb")
     file.write(image.file.read())
 
-    if imageData[title]:
+    if title in imageData:
         return "Error"
     
     imageData[title] = {"user": user, "description": description}

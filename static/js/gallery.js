@@ -90,17 +90,17 @@ function loadImages() {
         //Running the append image function, for every image in the image Info
         for(let i = 0; i < imageKeysArray.length; i++) {
             //appending the images with the relevant data
-            appendImages(i, imageKeysArray);
+            var imageTitle = imageKeysArray[i];
+            appendImages(imageTitle, imageInfo);
         }
     })
     
 }
 
 //This function is used to display an image on the website, after organizing it into the proper format. it takes an image id,the imageInfo json, and the array of keys in the json as arguments
-function appendImages(i,imageKeysArray) {
+function appendImages(imageTitle, imageInfo) {
 
     
-    console.log(imageKeysArray[i])
 
     //creating the elements necessary to display the image on the website
     const galleryElement = document.createElement("li");
@@ -110,8 +110,8 @@ function appendImages(i,imageKeysArray) {
     const linkElement = document.createElement("a");
 
     //modifying elements so the image can be clicked to be displayed directly
-    linkElement.href = "/GetImages/" + imageKeysArray[i];
-    galleryElement.id = "image" + i;
+    linkElement.href = "/GetImages/" + imageTitle;
+    galleryElement.id = "image" + imageTitle;
 
     //Modifying the elements class names so the proper style can be applied
     userElement.className = "userElement";
@@ -119,9 +119,9 @@ function appendImages(i,imageKeysArray) {
     titleElement.className = "titleElement";
 
     //inserting the data from the image Info json into the HTML elements
-    userElement.innerText = "Uploaded by " + imageKeysArray[i]["user"];
-    titleElement.innerText = imageKeysArray[i];
-    descriptionElement.innerText = imageKeysArray[i]["description"];
+    userElement.innerText = "Uploaded by " + imageInfo[imageTitle]["user"];
+    titleElement.innerText = imageTitle;
+    descriptionElement.innerText = imageInfo[imageTitle]["description"];
 
 
     //Constructing the element hierarchy to be displayed on the website
@@ -131,7 +131,7 @@ function appendImages(i,imageKeysArray) {
     galleryElement.appendChild(userElement);
 
     //Making a GET request for the image in question
-    fetch("/GetImages/" + imageKeysArray[i])
+    fetch("/GetImages/" + imageTitle)
       //handling the response
       .then((response) => {
         //throwing an error if the response is faulty
