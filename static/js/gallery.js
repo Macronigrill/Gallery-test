@@ -88,7 +88,7 @@ function loadImages() {
         //Making an array of keys in the json (these keys are numbers, this is done so the number of images can be checked)
         imageKeysArray = Object.keys(imageInfo);
         //Running the append image function, for every image in the image Info
-        for(let i = 0; i < imageKeysArray.length; i++) {
+        for(let i = 0; i <= imageKeysArray.length; i++) {
             //appending the images with the relevant data
             var imageTitle = imageKeysArray[i];
             appendImages(imageTitle, imageInfo);
@@ -130,32 +130,11 @@ function appendImages(imageTitle, imageInfo) {
     galleryElement.appendChild(linkElement);
     galleryElement.appendChild(userElement);
 
-    //Making a GET request for the image in question
-    fetch("/Images/get/" + imageTitle)
-      //handling the response
-      .then((response) => {
-        //throwing an error if the response is faulty
-        if (!response.ok) {
-          console.error("Error getting image");
-        }
-        //return the response as a blob
-        return response.blob();
-      })
-      //Creating an image element and adding the response data to it
-      .then((blobData) => {
-        
-        //creating the image element and modifying it to include the image data
-        var imgElement = document.createElement("img");
-        imgElement.src = URL.createObjectURL(blobData);
-        imgElement.className = "galleryImage";
-        
-        //adding the image to the element created before
-        linkElement.appendChild(imgElement);
-      })
-      //throwing an error if the request fails
-      .catch((error) => {
-        console.error("Error getting image:", error);
-      });
+    //creating the image element,setting the source,and adding it to the construct.
+    var imgElement = document.createElement("img");
+    imgElement.src = "/Images/get/" + imageTitle;
+    imgElement.className = "galleryImage";
+    linkElement.appendChild(imgElement);
     
     //adding the constructed element to the gallery, displaying it on the website
     gallery.appendChild(galleryElement);
