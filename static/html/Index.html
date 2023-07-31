@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <link rel="icon" href="../images/ImagesIcon.png">
+    <link rel="stylesheet" href="/static/css/Images.css">
+</head>
+
+<body onload="loadImages()">
+    <div class="uploadSection">
+        <form action="">
+            <img src="#" alt="" class="imagePreview" id="imagePreview">
+            <input type="file" class="imageInput" id="imageInput" accept="image/*">
+            <textarea id="userInput" cols="30" rows="1" placeholder="Username" class="userInput"></textarea>
+            <textarea id="titleInput" cols="30" rows="1" placeholder="Title" class="titleInput"></textarea>
+            <textarea id="descriptionInput" cols="30" rows="10" placeholder="Description..." class="descriptionInput"></textarea>
+        </form>
+        <button id="uploadButton" class="uploadButton" onclick="submitImage()"> Upload </button>
+    </div>
+    <ol id="gallery" class="gallery">
+
+    </ol>
+    <script src="/static/js/gallery.js"></script>
+</body>
+
+</html>

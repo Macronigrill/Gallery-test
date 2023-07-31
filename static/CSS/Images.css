@@ -1,0 +1,96 @@
+body {
+    background-color: rgb(47 66 77);
+}
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.uploadSection {
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+}
+.galleryImage {
+    display: block;
+    width:500px;
+    margin-top: 0px;
+    top: 0px;
+    left: 0px;
+    background-color: #7d8993;
+    padding: 20px;
+    padding-right: 400px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+} 
+.userElement {
+    position: relative;
+    display: block;
+    max-block-size: 300px;
+    overflow: hidden;
+    left: 550px;
+    top: -60px;
+    margin-top: 0px;
+}
+.titleElement {
+    font-size: xx-large;
+    position: relative;
+    display: block;
+    left: 550px;
+    top: 3px;
+    margin-top: 0px;
+    margin-bottom: -50px;
+}
+.descriptionElement {
+    font-size: large;
+    position: absolute;
+    display: inline;
+    max-inline-size: 350px;
+    overflow: hidden;
+    max-height: 500px;
+    left: 0px;
+    top: 10px;
+    margin-top: 35px;
+    margin-bottom: -50px;
+}
+.gallery {
+    position: absolute;
+    display: block;
+    top: 5px;
+}
+
+ol li {
+    margin-top: 0px;
+    list-style-type: none;
+}
+
+.imagePreview {
+    width: 240px;
+}
+.imageInput {
+    display: flex;
+    color: rgb(139, 139, 139);
+}
+.userInput {
+    display: block;
+    margin-bottom: 5px;
+}
+.titleInput {
+    display: block;
+    margin-bottom: 0px;
+}
+.descriptionInput {
+    display: block;
+}
+.uploadButton {
+    display: block;
+}
+
+textarea {
+    resize: none;
+    background-color: #7d8993;
+
+}
+button {
+    background-color: #7d8993;
+}
